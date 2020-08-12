@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const { type } = require('os');
 
+app.use(express.static('public'));
+
 //parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 //parse incoming JSON data
@@ -99,6 +101,10 @@ app.get('/api/animals/:id', (req, res) => {
     else {
         res.sendStatus(404);
     }
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.post('/api/animals', (req, res) => {
